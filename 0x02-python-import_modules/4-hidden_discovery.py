@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-import sys
-import hidden_4 as hidden
 
-if __name__ != "__main__":
-    exit()
+if __name__ == "__main__":
+    """Print all names defined by hidden_4 module."""
+    import hidden_4
 
-for name in dir(hidden):
-    if name[0:2] != "__":
-        print(name)
+    names = dir(hidden_4)
+    for name in names:
+        if name[:2] != "__":
+            print(name)
