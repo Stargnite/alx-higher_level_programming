@@ -1,9 +1,15 @@
 #!/usr/bin/node
-function recursion(a) {
-  if (a === 0) {
-    return 1;
+function factorial (number) {
+  if (number === 0) {
+    return (1);
   } else {
-    return a * recursion(a - 1);
+    return (factorial(number - 1) * number);
   }
 }
-console.log(recursion(10));
+const number = parseInt(process.argv[2]);
+if (number) {
+  const result = factorial(number);
+  console.log(result);
+} else {
+  console.log(1);
+}
