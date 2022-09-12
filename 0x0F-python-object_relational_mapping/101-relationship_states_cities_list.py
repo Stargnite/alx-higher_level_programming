@@ -1,32 +1,22 @@
 #!/usr/bin/python3
+""" prints the State object with the name passed as argument from the database
 """
-@author: Sobayo Tobi
-
-"""
+import sys
 from relationship_state import Base, State
 from relationship_city import City
+from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
-import sys
+from sqlalchemy.orm import relationship
 
 
-if __name__ == '__main__':
-    args = sys.argv
-    if len(args) != 4:
-        print("Usage: {} username password database_name".format(args[0]))
-        exit(1)
-    username = args[1]
-    password = args[2]
-    data = args[3]
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
-                           .format(username, password, data))
-    # create custom session object class from database engine
+if __name__ == "__main__":
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                           .format(sys.argv[1], sys.argv[2], sys.argv[3]))
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
-    # create instance of new custom session class
     session = Session()
-    rows = session.query(State).all()
-    for state in rows:
-        print("{}: {}".format(state.id, state.name))
-        for city in state.cities:
-            print("    {}: {}".format(city.id, city.name))
-    session.close()
+    for instance in session.query(State).order_by(State.id):
+        print(instance.id, instance.name, sep=": ")
+        for city_ins in instance.cities:
+            print("    ", end="")
+            print(city_ins.id, city_ins.name, sep=": ")

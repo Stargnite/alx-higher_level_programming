@@ -1,17 +1,17 @@
 #!/usr/bin/python3
-"""script for using sqlalchemy to model our models using ORM
 """
-from sqlalchemy import Column, Integer, String, ForeignKey
+Contains the class definition of a City
+"""
 from model_state import Base
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
 
 
 class City(Base):
     """
-    cities class for use with sqlalchemy inherits from sqlalchemy
-    declarative_base
+    Class that defines each city
     """
     __tablename__ = 'cities'
-
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, unique=True, nullable=False, primary_key=True)
     name = Column(String(128), nullable=False)
-    state_id = Column(Integer, ForeignKey("state.id"), nullable=False)
+    state_id = Column(Integer, ForeignKey("states.id"), nullable=False)
