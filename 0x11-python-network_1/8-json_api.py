@@ -3,7 +3,6 @@
 """
 Created on Mon sept 24  2022
 """
-
 from requests import post, codes
 from sys import argv
 
