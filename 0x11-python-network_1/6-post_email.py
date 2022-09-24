@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Aug 24 07:02:53 2020
-
-@author: Robinson Montes
+Created on Mon sept 24  2022
 """
 from requests import post
 from sys import argv
